@@ -156,11 +156,10 @@ int parse_command(char* command){
             }
         }
     }else if(strcmp(tokens[0], "exit") == 0) {
-        if(tokens[2] != NULL){
+        if(tokens[1] != NULL && tokens[2] != NULL){
             fprintf(stderr, "%s: exit: too many arguments\n", shell_basename);
         }else{
             if(tokens[1] != NULL){
-                // no code given
                 exit_code = atoi(tokens[1]);
             }
             exit = 1;
