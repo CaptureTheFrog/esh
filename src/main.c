@@ -27,6 +27,7 @@ bool interactive = false;
 char* path;
 char* arg0;
 char* shell_basename;
+extern char **environ;
 int exit_code = 0;
 uint32_t path_components = 0;
 
@@ -190,8 +191,7 @@ int parse_command(char* command){
                     // executable
                     pid_t pid = fork();
                     if (pid == 0) {
-                        char *envp[1] = {NULL};
-                        if (execve(file, tokens, envp) == -1) {
+                        if (execve(file, tokens, environ) == -1) {
                             perror("Error in execve\n");
                             // todo exit process
                         }
